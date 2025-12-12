@@ -15,7 +15,7 @@ const state = {
 };
 
 // Número do WhatsApp (substitua pelo seu)
-const WHATSAPP_NUMBER = '5511999999999';
+const WHATSAPP_NUMBER = '5555996283243';
 
 // Taxa de entrega fixa
 const DELIVERY_FEE = 10.00;
