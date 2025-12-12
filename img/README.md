@@ -1,29 +1,56 @@
-# Pasta de Imagens dos Produtos
+# 📸 Pasta de Imagens
 
-Esta pasta deve conter as fotos dos produtos do cardápio.
+## Imagens Necessárias
 
-## Imagens necessárias (conforme produtos.json):
+Adicione as seguintes imagens dos produtos nesta pasta:
 
-### Sanduíches:
-- `x-burger.jpg` - Foto do X-Burger
-- `x-salada.jpg` - Foto do X-Salada
-- `x-bacon.jpg` - Foto do X-Bacon
-- `x-tudo.jpg` - Foto do X-Tudo
+### Lanches 🍔
+- `xburger.jpg` - X-Burger
+- `xbacon.jpg` - X-Bacon
+- `xsalada.jpg` - X-Salada
+- `xtudo.jpg` - X-Tudo
+- `xfrango.jpg` - X-Frango
+- `hotdog.jpg` - Hot Dog Completo
 
-### Bebidas:
-- `refrigerante.jpg` - Foto de refrigerante
-- `suco.jpg` - Foto de suco natural
-- `agua.jpg` - Foto de água mineral
+### Bebidas 🥤
+- `coca.jpg` - Coca-Cola 350ml
+- `guarana.jpg` - Guaraná Antarctica 350ml
+- `suco.jpg` - Suco Natural 500ml
+- `agua.jpg` - Água Mineral 500ml
 
-### Porções:
-- `batata-frita.jpg` - Foto de batata frita
-- `onion-rings.jpg` - Foto de onion rings
-- `nuggets.jpg` - Foto de nuggets
+### Porções 🍟
+- `batata.jpg` - Batata Frita
+- `nuggets.jpg` - Nuggets de Frango
+- `onion.jpg` - Onion Rings
 
-## Formato recomendado:
-- Formato: JPG ou PNG
-- Dimensões sugeridas: 600x400px (3:2)
-- Tamanho do arquivo: Máximo 200KB por imagem
+### Sobremesas 🍨
+- `sundae.jpg` - Sundae de Chocolate
+- `milkshake.jpg` - Milkshake
 
-## Nota:
-Se as imagens não estiverem disponíveis, o site exibirá emojis como fallback.
+## Especificações das Imagens
+
+- **Formato**: JPG ou PNG
+- **Dimensões recomendadas**: 300x300px ou superior (proporção 1:1)
+- **Tamanho do arquivo**: Máximo 500KB por imagem para carregamento rápido
+- **Qualidade**: Alta qualidade, bem iluminadas, fundo claro ou neutro
+
+## Dicas para Fotos de Produtos
+
+1. **Iluminação**: Use luz natural ou iluminação adequada
+2. **Fundo**: Prefira fundos claros e neutros
+3. **Enquadramento**: Centralize o produto, mostrando todos os detalhes
+4. **Edição**: Aumente levemente o brilho e contraste se necessário
+5. **Consistência**: Mantenha o mesmo estilo para todas as fotos
+
+## Fallback Automático
+
+Caso alguma imagem não seja encontrada, o sistema exibirá automaticamente um placeholder com o nome do produto.
+
+## Fontes Gratuitas de Imagens
+
+Se precisar de imagens temporárias ou de exemplo:
+- [Unsplash](https://unsplash.com/s/photos/burger)
+- [Pexels](https://www.pexels.com/search/food/)
+- [Pixabay](https://pixabay.com/images/search/fast%20food/)
+
+**Importante**: Use apenas imagens com licença livre ou fotos próprias dos seus produtos.

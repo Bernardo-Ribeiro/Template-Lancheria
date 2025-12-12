@@ -1,98 +1,122 @@
-{
-  "categorias": [
-    {
-      "id": "sanduiches",
-      "nome": "Sanduíches",
-      "produtos": [
-        {
-          "id": 1,
-          "nome": "X-Burger",
-          "descricao": "Hambúrguer, queijo, alface, tomate e maionese",
-          "preco": 15.90,
-          "imagem": "img/x-burger.jpg"
-        },
-        {
-          "id": 2,
-          "nome": "X-Salada",
-          "descricao": "Hambúrguer, queijo, alface, tomate, milho e ervilha",
-          "preco": 17.90,
-          "imagem": "img/x-salada.jpg"
-        },
-        {
-          "id": 3,
-          "nome": "X-Bacon",
-          "descricao": "Hambúrguer, queijo, bacon crocante e molho especial",
-          "preco": 19.90,
-          "imagem": "img/x-bacon.jpg"
-        },
-        {
-          "id": 4,
-          "nome": "X-Tudo",
-          "descricao": "Hambúrguer, queijo, bacon, ovo, presunto, alface e tomate",
-          "preco": 24.90,
-          "imagem": "img/x-tudo.jpg"
-        }
-      ]
-    },
-    {
-      "id": "bebidas",
-      "nome": "Bebidas",
-      "produtos": [
-        {
-          "id": 5,
-          "nome": "Refrigerante Lata",
-          "descricao": "Coca-Cola, Guaraná, Fanta ou Sprite",
-          "preco": 5.00,
-          "imagem": "img/refrigerante.jpg"
-        },
-        {
-          "id": 6,
-          "nome": "Suco Natural",
-          "descricao": "Laranja, limão, morango ou maracujá",
-          "preco": 8.00,
-          "imagem": "img/suco.jpg"
-        },
-        {
-          "id": 7,
-          "nome": "Água Mineral",
-          "descricao": "500ml",
-          "preco": 3.00,
-          "imagem": "img/agua.jpg"
-        }
-      ]
-    },
-    {
-      "id": "porcoes",
-      "nome": "Porções",
-      "produtos": [
-        {
-          "id": 8,
-          "nome": "Batata Frita",
-          "descricao": "Porção de batatas fritas crocantes (serve 2 pessoas)",
-          "preco": 18.00,
-          "imagem": "img/batata-frita.jpg"
-        },
-        {
-          "id": 9,
-          "nome": "Onion Rings",
-          "descricao": "Anéis de cebola empanados e fritos",
-          "preco": 16.00,
-          "imagem": "img/onion-rings.jpg"
-        },
-        {
-          "id": 10,
-          "nome": "Nuggets",
-          "descricao": "12 unidades com molho especial",
-          "preco": 20.00,
-          "imagem": "img/nuggets.jpg"
-        }
-      ]
-    }
-  ],
-  "informacoes": {
-    "nome_estabelecimento": "Lancheria do Bairro",
-    "telefone": "(11) 98765-4321",
-    "endereco": "Rua das Flores, 123 - Centro",
-    "horario": "Ter-Dom: 18h às 23h"
+[
+  {
+    "id": 1,
+    "nome": "X-Burger",
+    "descricao": "Hambúrguer artesanal, queijo cheddar, alface, tomate e maionese especial",
+    "preco": 18.90,
+    "imagem": "img/xburger.png",
+    "categoria": "Lanches"
+  },
+  {
+    "id": 2,
+    "nome": "X-Bacon",
+    "descricao": "Hambúrguer artesanal, bacon crocante, queijo, alface, tomate e molho barbecue",
+    "preco": 21.90,
+    "imagem": "img/xbacon.jpg",
+    "categoria": "Lanches"
+  },
+  {
+    "id": 3,
+    "nome": "X-Salada",
+    "descricao": "Hambúrguer artesanal, queijo, alface, tomate, milho e maionese",
+    "preco": 16.90,
+    "imagem": "img/xsalada.jpg",
+    "categoria": "Lanches"
+  },
+  {
+    "id": 4,
+    "nome": "X-Tudo",
+    "descricao": "Hambúrguer duplo, bacon, queijo, ovo, calabresa, alface, tomate e molho especial",
+    "preco": 28.90,
+    "imagem": "img/xtudo.jpg",
+    "categoria": "Lanches"
+  },
+  {
+    "id": 5,
+    "nome": "X-Frango",
+    "descricao": "Filé de frango grelhado, queijo, alface, tomate e maionese",
+    "preco": 17.90,
+    "imagem": "img/xfrango.jpg",
+    "categoria": "Lanches"
+  },
+  {
+    "id": 6,
+    "nome": "Hot Dog Completo",
+    "descricao": "Salsicha, molho, milho, ervilha, batata palha, queijo ralado e maionese",
+    "preco": 14.90,
+    "imagem": "img/hotdog.jpg",
+    "categoria": "Lanches"
+  },
+  {
+    "id": 7,
+    "nome": "Coca-Cola 350ml",
+    "descricao": "Refrigerante Coca-Cola lata gelada",
+    "preco": 5.00,
+    "imagem": "img/coca.jpg",
+    "categoria": "Bebidas"
+  },
+  {
+    "id": 8,
+    "nome": "Guaraná Antarctica 350ml",
+    "descricao": "Refrigerante Guaraná Antarctica lata gelada",
+    "preco": 5.00,
+    "imagem": "img/guarana.webp",
+    "categoria": "Bebidas"
+  },
+  {
+    "id": 9,
+    "nome": "Suco Natural 500ml",
+    "descricao": "Suco natural de laranja ou limão",
+    "preco": 8.00,
+    "imagem": "img/suco.jpg",
+    "categoria": "Bebidas"
+  },
+  {
+    "id": 10,
+    "nome": "Água Mineral 500ml",
+    "descricao": "Água mineral sem gás",
+    "preco": 3.50,
+    "imagem": "img/agua.jpg",
+    "categoria": "Bebidas"
+  },
+  {
+    "id": 11,
+    "nome": "Batata Frita",
+    "descricao": "Porção de batatas fritas crocantes (300g)",
+    "preco": 15.00,
+    "imagem": "img/batata.jpg",
+    "categoria": "Porções"
+  },
+  {
+    "id": 12,
+    "nome": "Nuggets de Frango",
+    "descricao": "10 unidades de nuggets empanados e fritos",
+    "preco": 18.00,
+    "imagem": "img/nuggets.jpg",
+    "categoria": "Porções"
+  },
+  {
+    "id": 13,
+    "nome": "Onion Rings",
+    "descricao": "Anéis de cebola empanados e fritos (200g)",
+    "preco": 16.00,
+    "imagem": "img/onion.webp",
+    "categoria": "Porções"
+  },
+  {
+    "id": 14,
+    "nome": "Sundae de Chocolate",
+    "descricao": "Sorvete de creme com calda de chocolate",
+    "preco": 12.00,
+    "imagem": "img/sundae.jpg",
+    "categoria": "Sobremesas"
+  },
+  {
+    "id": 15,
+    "nome": "Milkshake",
+    "descricao": "Milkshake cremoso de chocolate, morango ou baunilha",
+    "preco": 14.00,
+    "imagem": "img/milkshake.jpg",
+    "categoria": "Sobremesas"
   }
-}
+]

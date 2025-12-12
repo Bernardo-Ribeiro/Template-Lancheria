@@ -3,60 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lancheria do Bairro - Cardápio</title>
+    <title>Lancheria Delícia - Peça Agora!</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <meta name="description" content="Os melhores lanches artesanais da região. Peça agora pelo WhatsApp!">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <h1>🍔 Lancheria do Bairro</h1>
-                <div class="header-info">
-                    <p class="telefone">📞 <span id="telefone"></span></p>
-                    <p class="horario">🕒 <span id="horario"></span></p>
-                </div>
-            </div>
+    <!-- Header fixo -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🍔 Lancheria Delícia</div>
+            <button class="cart-button" id="cart-button">
+                🛒
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h2>Bem-vindo ao nosso cardápio!</h2>
-            <p>Confira nossas deliciosas opções</p>
-        </section>
-
-        <section class="filters">
-            <button class="filter-btn active" data-categoria="all">Todos</button>
-            <div id="category-filters"></div>
-        </section>
-
-        <section id="menu" class="menu-grid">
-            <!-- Produtos serão carregados dinamicamente pelo app.js -->
-        </section>
-
-        <section class="info-section">
-            <div class="info-card">
-                <h3>📍 Endereço</h3>
-                <p id="endereco"></p>
-            </div>
-            <div class="info-card">
-                <h3>📞 Contato</h3>
-                <p id="telefone-footer"></p>
-            </div>
-            <div class="info-card">
-                <h3>🕒 Horário</h3>
-                <p id="horario-footer"></p>
-            </div>
-        </section>
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <!-- Cardápio por categorias -->
+        <div id="menu-container" class="menu-container"></div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Lancheria do Bairro. Todos os direitos reservados.</p>
-            <p>Desenvolvido com ❤️ para sua fome</p>
+    <!-- Drawer do carrinho -->
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-overlay" id="cart-overlay"></div>
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>🛒 Seu Pedido</h2>
+                <button class="close-cart" id="close-cart">✕</button>
+            </div>
+            
+            <div class="cart-body">
+                <div id="cart-items" class="cart-items">
+                    <p class="empty-cart">Seu carrinho está vazio 😢</p>
+                </div>
+
+                <div class="cart-total" id="cart-total-section" style="display: none;">
+                    <div class="total-line">
+                        <span>Total:</span>
+                        <span class="total-value" id="cart-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <form id="order-form" class="order-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="customer-name">Nome:</label>
+                        <input type="text" id="customer-name" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-address">Endereço:</label>
+                        <input type="text" id="customer-address" placeholder="Rua, número, bairro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-notes">Observações (opcional):</label>
+                        <textarea id="customer-notes" placeholder="Alguma observação sobre seu pedido?" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-whatsapp">
+                        Finalizar no WhatsApp 💬
+                    </button>
+                </form>
+            </div>
         </div>
-    </footer>
+    </div>
 
     <script src="app.js"></script>
 </body>
