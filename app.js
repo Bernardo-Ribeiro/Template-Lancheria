@@ -125,7 +125,8 @@ function createProductCard(produto, categoriaNome) {
     
     const price = document.createElement('div');
     price.className = 'product-price';
-    price.textContent = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
+    const priceValue = Number(produto.preco) || 0;
+    price.textContent = `R$ ${priceValue.toFixed(2).replace('.', ',')}`;
     
     infoDiv.appendChild(category);
     infoDiv.appendChild(name);

@@ -229,8 +229,8 @@ footer p {
 }
 
 /* Hidden class for filtering */
-.hidden {
-    display: none !important;
+.menu-grid .hidden {
+    display: none;
 }
 
 /* Loading State */
