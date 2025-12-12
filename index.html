@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancheria do Bairro - Cardápio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>🍔 Lancheria do Bairro</h1>
+                <div class="header-info">
+                    <p class="telefone">📞 <span id="telefone"></span></p>
+                    <p class="horario">🕒 <span id="horario"></span></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Bem-vindo ao nosso cardápio!</h2>
+            <p>Confira nossas deliciosas opções</p>
+        </section>
+
+        <section class="filters">
+            <button class="filter-btn active" data-categoria="all">Todos</button>
+            <div id="category-filters"></div>
+        </section>
+
+        <section id="menu" class="menu-grid">
+            <!-- Produtos serão carregados dinamicamente pelo app.js -->
+        </section>
+
+        <section class="info-section">
+            <div class="info-card">
+                <h3>📍 Endereço</h3>
+                <p id="endereco"></p>
+            </div>
+            <div class="info-card">
+                <h3>📞 Contato</h3>
+                <p id="telefone-footer"></p>
+            </div>
+            <div class="info-card">
+                <h3>🕒 Horário</h3>
+                <p id="horario-footer"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Lancheria do Bairro. Todos os direitos reservados.</p>
+            <p>Desenvolvido com ❤️ para sua fome</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
