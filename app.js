@@ -351,7 +351,12 @@ function updateCartUI() {
             <div class="cart-item">
                 <div class="cart-item-info">
                     <h4>${item.product.nome}</h4>
-                    <p class="cart-item-quantity">${item.quantity}x</p>
+                    <p class="cart-item-price-unit">R$ ${item.product.preco.toFixed(2).replace('.', ',')} cada</p>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="cart-qty-btn minus" onclick="decreaseQuantity(${item.product.id})">−</button>
+                    <span class="cart-quantity-value">${item.quantity}</span>
+                    <button class="cart-qty-btn plus" onclick="increaseQuantity(${item.product.id})">+</button>
                 </div>
                 <span class="cart-item-price">R$ ${itemSubtotal.toFixed(2).replace('.', ',')}</span>
             </div>
