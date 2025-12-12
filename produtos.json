@@ -1,0 +1,98 @@
+{
+  "categorias": [
+    {
+      "id": "sanduiches",
+      "nome": "Sanduíches",
+      "produtos": [
+        {
+          "id": 1,
+          "nome": "X-Burger",
+          "descricao": "Hambúrguer, queijo, alface, tomate e maionese",
+          "preco": 15.90,
+          "imagem": "img/x-burger.jpg"
+        },
+        {
+          "id": 2,
+          "nome": "X-Salada",
+          "descricao": "Hambúrguer, queijo, alface, tomate, milho e ervilha",
+          "preco": 17.90,
+          "imagem": "img/x-salada.jpg"
+        },
+        {
+          "id": 3,
+          "nome": "X-Bacon",
+          "descricao": "Hambúrguer, queijo, bacon crocante e molho especial",
+          "preco": 19.90,
+          "imagem": "img/x-bacon.jpg"
+        },
+        {
+          "id": 4,
+          "nome": "X-Tudo",
+          "descricao": "Hambúrguer, queijo, bacon, ovo, presunto, alface e tomate",
+          "preco": 24.90,
+          "imagem": "img/x-tudo.jpg"
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "nome": "Bebidas",
+      "produtos": [
+        {
+          "id": 5,
+          "nome": "Refrigerante Lata",
+          "descricao": "Coca-Cola, Guaraná, Fanta ou Sprite",
+          "preco": 5.00,
+          "imagem": "img/refrigerante.jpg"
+        },
+        {
+          "id": 6,
+          "nome": "Suco Natural",
+          "descricao": "Laranja, limão, morango ou maracujá",
+          "preco": 8.00,
+          "imagem": "img/suco.jpg"
+        },
+        {
+          "id": 7,
+          "nome": "Água Mineral",
+          "descricao": "500ml",
+          "preco": 3.00,
+          "imagem": "img/agua.jpg"
+        }
+      ]
+    },
+    {
+      "id": "porcoes",
+      "nome": "Porções",
+      "produtos": [
+        {
+          "id": 8,
+          "nome": "Batata Frita",
+          "descricao": "Porção de batatas fritas crocantes (serve 2 pessoas)",
+          "preco": 18.00,
+          "imagem": "img/batata-frita.jpg"
+        },
+        {
+          "id": 9,
+          "nome": "Onion Rings",
+          "descricao": "Anéis de cebola empanados e fritos",
+          "preco": 16.00,
+          "imagem": "img/onion-rings.jpg"
+        },
+        {
+          "id": 10,
+          "nome": "Nuggets",
+          "descricao": "12 unidades com molho especial",
+          "preco": 20.00,
+          "imagem": "img/nuggets.jpg"
+        }
+      ]
+    }
+  ],
+  "informacoes": {
+    "nome_estabelecimento": "Lancheria do Bairro",
+    "telefone": "(11) 98765-4321",
+    "endereco": "Rua das Flores, 123 - Centro",
+    "horario": "Ter-Dom: 18h às 23h"
+  }
+}
