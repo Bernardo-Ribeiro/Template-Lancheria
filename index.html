@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancheria - Faça seu pedido</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">🍔 Lancheria</h1>
+            <button class="cart-button" onclick="toggleCart()">
+                🛒
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Lanches Category -->
+        <section class="category">
+            <div class="category-header">
+                <h2 class="category-title">🍔 Lanches</h2>
+                <div class="category-divider"></div>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-id="1" data-name="X-Burger Clássico" data-price="25.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=400&fit=crop" alt="X-Burger Clássico">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">X-Burger Clássico</h3>
+                        <p class="product-description">Hambúrguer artesanal, queijo, alface, tomate e molho especial</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 25,90</span>
+                            <button class="btn-add" onclick="addToCart(1)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(1)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="2" data-name="X-Bacon Especial" data-price="29.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop" alt="X-Bacon Especial">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">X-Bacon Especial</h3>
+                        <p class="product-description">Hambúrguer artesanal, bacon crocante, queijo e cebola caramelizada</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 29,90</span>
+                            <button class="btn-add" onclick="addToCart(2)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(2)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(2)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="3" data-name="X-Vegano" data-price="27.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=400&h=400&fit=crop" alt="X-Vegano">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">X-Vegano</h3>
+                        <p class="product-description">Hambúrguer de grão-de-bico, queijo vegano, rúcula e tomate seco</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 27,90</span>
+                            <button class="btn-add" onclick="addToCart(3)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(3)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(3)">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bebidas Category -->
+        <section class="category">
+            <div class="category-header">
+                <h2 class="category-title">🥤 Bebidas</h2>
+                <div class="category-divider"></div>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-id="4" data-name="Refrigerante Lata" data-price="5.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=400&fit=crop" alt="Refrigerante Lata">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Refrigerante Lata</h3>
+                        <p class="product-description">Lata 350ml - Coca-Cola, Guaraná ou Sprite</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 5,90</span>
+                            <button class="btn-add" onclick="addToCart(4)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(4)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(4)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="5" data-name="Suco Natural" data-price="8.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=400&fit=crop" alt="Suco Natural">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Suco Natural</h3>
+                        <p class="product-description">500ml - Laranja, Limão ou Morango</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 8,90</span>
+                            <button class="btn-add" onclick="addToCart(5)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(5)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(5)">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobremesas Category -->
+        <section class="category">
+            <div class="category-header">
+                <h2 class="category-title">🍰 Sobremesas</h2>
+                <div class="category-divider"></div>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-id="6" data-name="Brownie" data-price="12.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400&h=400&fit=crop" alt="Brownie">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Brownie</h3>
+                        <p class="product-description">Brownie de chocolate belga com nozes</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 12,90</span>
+                            <button class="btn-add" onclick="addToCart(6)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(6)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(6)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="7" data-name="Milkshake" data-price="15.90">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=400&fit=crop" alt="Milkshake">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Milkshake</h3>
+                        <p class="product-description">500ml - Chocolate, Morango ou Baunilha</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 15,90</span>
+                            <button class="btn-add" onclick="addToCart(7)">+ Adicionar</button>
+                        </div>
+                    </div>
+                    <div class="product-controls" style="display: none;">
+                        <button class="btn-minus" onclick="removeFromCart(7)">−</button>
+                        <span class="product-quantity">0</span>
+                        <button class="btn-plus" onclick="addToCart(7)">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>🛒 Seu Pedido</h2>
+            <button class="cart-close" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <p>Seu carrinho está vazio</p>
+                <p class="empty-cart-subtitle">Adicione itens para começar!</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span class="total-label">Total</span>
+                <span class="total-value" id="totalValue">R$ 0,00</span>
+            </div>
+            <button class="btn-finalize" onclick="finalizeOrder()">
+                <span class="whatsapp-icon">📱</span>
+                Finalizar no WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
