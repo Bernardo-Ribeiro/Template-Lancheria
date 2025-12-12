@@ -12,10 +12,17 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">🍔 Lancheria Delícia</div>
-            <button class="cart-button" id="cart-button">
-                🛒
-                <span class="cart-count" id="cart-count">0</span>
-            </button>
+            <div class="header-actions">
+                <button class="cart-button" id="cart-button">
+                    🛒
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        <div class="status-bar" id="status-bar"></div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="🔍 Buscar produtos..." autocomplete="off">
+            <button id="clear-search" class="clear-search" style="display: none;">✕</button>
         </div>
     </header>
 
@@ -31,7 +38,10 @@
         <div class="cart-content">
             <div class="cart-header">
                 <h2>🛒 Seu Pedido</h2>
-                <button class="close-cart" id="close-cart">✕</button>
+                <div class="cart-header-actions">
+                    <button class="history-button" id="history-button" title="Ver Histórico">📋</button>
+                    <button class="close-cart" id="close-cart">✕</button>
+                </div>
             </div>
             
             <div class="cart-body">
@@ -93,6 +103,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Histórico será inserido dinamicamente -->
 
     <script src="app.js"></script>
 </body>

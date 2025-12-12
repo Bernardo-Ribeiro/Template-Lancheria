@@ -6,6 +6,7 @@
 const state = {
     products: [],
     cart: {},
+    searchTerm: '',
     categoryEmojis: {
         'Lanches': '🍔',
         'Bebidas': '🥤',
@@ -20,13 +21,93 @@ const WHATSAPP_NUMBER = '5555996283243';
 // Taxa de entrega fixa
 const DELIVERY_FEE = 10.00;
 
+// Horário de Funcionamento
+const BUSINESS_HOURS = {
+    // Dias da semana (0 = Domingo, 1 = Segunda, ..., 6 = Sábado)
+    0: null, // Domingo - Fechado
+    1: null, // Segunda - Fechado
+    2: { open: '18:00', close: '23:00' }, // Terça
+    3: { open: '18:00', close: '23:00' }, // Quarta
+    4: { open: '18:00', close: '23:00' }, // Quinta
+    5: { open: '18:00', close: '23:00' }, // Sexta
+    6: { open: '18:00', close: '23:00' }  // Sábado
+};
+
 // ============================================
 // INICIALIZAÇÃO
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     setupEventListeners();
+    checkBusinessHours();
+    loadOrderHistory();
 });
+
+// ============================================
+// VERIFICAR HORÁRIO DE FUNCIONAMENTO
+// ============================================
+function checkBusinessHours() {
+    const now = new Date();
+    const day = now.getDay();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+    
+    const statusBar = document.getElementById('status-bar');
+    const hours = BUSINESS_HOURS[day];
+    
+    if (!hours) {
+        // Fechado hoje
+        statusBar.innerHTML = '⛔ Fechado hoje';
+        statusBar.className = 'status-bar closed';
+        disableOrdering(true);
+        return false;
+    }
+    
+    // Converter horários para minutos
+    const [openHour, openMin] = hours.open.split(':').map(Number);
+    const [closeHour, closeMin] = hours.close.split(':').map(Number);
+    const openTime = openHour * 60 + openMin;
+    const closeTime = closeHour * 60 + closeMin;
+    
+    if (currentTime >= openTime && currentTime < closeTime) {
+        // Aberto
+        statusBar.innerHTML = `✅ Aberto - Fecha às ${hours.close}`;
+        statusBar.className = 'status-bar open';
+        disableOrdering(false);
+        return true;
+    } else {
+        // Fechado
+        statusBar.innerHTML = `⛔ Fechado - Abre às ${hours.open}`;
+        statusBar.className = 'status-bar closed';
+        disableOrdering(true);
+        return false;
+    }
+}
+
+// ============================================
+// DESABILITAR/HABILITAR PEDIDOS
+// ============================================
+function disableOrdering(disable) {
+    state.orderingDisabled = disable;
+    
+    // Atualizar botões de adicionar
+    document.querySelectorAll('.add-button').forEach(btn => {
+        btn.disabled = disable;
+        if (disable) {
+            btn.textContent = 'Fechado';
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+        }
+    });
+    
+    // Atualizar botões de quantidade
+    document.querySelectorAll('.qty-btn').forEach(btn => {
+        btn.disabled = disable;
+        if (disable) {
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+        }
+    });
+}
 
 // ============================================
 // CARREGAR PRODUTOS DO JSON
@@ -49,9 +130,25 @@ async function loadProducts() {
 function renderMenu() {
     const menuContainer = document.getElementById('menu-container');
     
+    // Filtrar produtos pela busca
+    let filteredProducts = state.products;
+    if (state.searchTerm) {
+        const term = state.searchTerm.toLowerCase();
+        filteredProducts = state.products.filter(product => 
+            product.nome.toLowerCase().includes(term) ||
+            product.descricao.toLowerCase().includes(term) ||
+            product.categoria.toLowerCase().includes(term)
+        );
+    }
+    
+    if (filteredProducts.length === 0) {
+        menuContainer.innerHTML = '<p class="no-results">🔍 Nenhum produto encontrado</p>';
+        return;
+    }
+    
     // Agrupar produtos por categoria
     const categories = {};
-    state.products.forEach(product => {
+    filteredProducts.forEach(product => {
         if (!categories[product.categoria]) {
             categories[product.categoria] = [];
         }
@@ -76,6 +173,11 @@ function renderMenu() {
     });
 
     menuContainer.innerHTML = html;
+    
+    // Reaplica o estado de desabilitação se necessário
+    if (state.orderingDisabled) {
+        disableOrdering(true);
+    }
 }
 
 // ============================================
@@ -109,9 +211,42 @@ function createProductCard(product) {
 }
 
 // ============================================
+// BUSCA DE PRODUTOS
+// ============================================
+function handleSearch() {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-search');
+    
+    state.searchTerm = searchInput.value.trim();
+    
+    if (state.searchTerm) {
+        clearButton.style.display = 'block';
+    } else {
+        clearButton.style.display = 'none';
+    }
+    
+    renderMenu();
+}
+
+function clearSearch() {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-search');
+    
+    searchInput.value = '';
+    state.searchTerm = '';
+    clearButton.style.display = 'none';
+    
+    renderMenu();
+}
+
+// ============================================
 // ADICIONAR AO CARRINHO
 // ============================================
 function addToCart(productId) {
+    if (state.orderingDisabled) {
+        alert('⛔ Desculpe, estamos fechados no momento!');
+        return;
+    }
     const product = state.products.find(p => p.id === productId);
     
     if (!state.cart[productId]) {
@@ -274,12 +409,123 @@ function setupEventListeners() {
             document.getElementById('change-for').value = '';
         }
     });
+    
+    // Busca de produtos
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', handleSearch);
+    
+    document.getElementById('clear-search').addEventListener('click', clearSearch);
+    
+    // Histórico de pedidos
+    document.getElementById('history-button').addEventListener('click', showOrderHistory);
+}
+
+// ============================================
+// HISTÓRICO DE PEDIDOS
+// ============================================
+function loadOrderHistory() {
+    const history = localStorage.getItem('orderHistory');
+    return history ? JSON.parse(history) : [];
+}
+
+function saveOrderToHistory(order) {
+    let history = loadOrderHistory();
+    history.unshift(order); // Adiciona no início
+    
+    // Manter apenas os últimos 10 pedidos
+    if (history.length > 10) {
+        history = history.slice(0, 10);
+    }
+    
+    localStorage.setItem('orderHistory', JSON.stringify(history));
+}
+
+function showOrderHistory() {
+    const history = loadOrderHistory();
+    
+    if (history.length === 0) {
+        alert('📋 Você ainda não fez nenhum pedido.');
+        return;
+    }
+    
+    let html = `
+        <div class="history-modal" id="history-modal">
+            <div class="history-content">
+                <div class="history-header">
+                    <h2>📋 Histórico de Pedidos</h2>
+                    <button class="close-history" onclick="closeHistory()">✕</button>
+                </div>
+                <div class="history-list">
+    `;
+    
+    history.forEach((order, index) => {
+        html += `
+            <div class="history-item">
+                <div class="history-item-header">
+                    <span class="history-date">${new Date(order.date).toLocaleString('pt-BR')}</span>
+                    <span class="history-total">R$ ${order.total.toFixed(2).replace('.', ',')}</span>
+                </div>
+                <div class="history-items">
+                    ${order.items.map(item => `<p>• ${item.nome} (${item.quantity}x)</p>`).join('')}
+                </div>
+                <button class="btn-repeat" onclick="repeatOrder(${index})">🔁 Repetir Pedido</button>
+            </div>
+        `;
+    });
+    
+    html += `
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', html);
+}
+
+function closeHistory() {
+    const modal = document.getElementById('history-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function repeatOrder(index) {
+    const history = loadOrderHistory();
+    const order = history[index];
+    
+    if (!order) return;
+    
+    // Limpar carrinho atual
+    state.cart = {};
+    
+    // Adicionar itens do pedido anterior
+    order.items.forEach(item => {
+        const product = state.products.find(p => p.id === item.id);
+        if (product) {
+            state.cart[item.id] = {
+                product: product,
+                quantity: item.quantity
+            };
+        }
+    });
+    
+    // Atualizar UI
+    renderMenu();
+    updateCartUI();
+    closeHistory();
+    openCart();
+    
+    alert('✅ Pedido anterior adicionado ao carrinho!');
 }
 
 // ============================================
 // PROCESSAR PEDIDO
 // ============================================
 function handleOrderSubmit(e) {
+    if (state.orderingDisabled) {
+        alert('⛔ Desculpe, estamos fechados no momento!');
+        return;
+    }
     e.preventDefault();
     
     const name = document.getElementById('customer-name').value.trim();
@@ -330,7 +576,32 @@ function handleOrderSubmit(e) {
         message += `*Observações:* ${notes}\n`;
     }
     
+    // Salvar pedido no histórico
+    const orderData = {
+        date: new Date().toISOString(),
+        items: Object.values(state.cart).map(item => ({
+            id: item.product.id,
+            nome: item.product.nome,
+            quantity: item.quantity,
+            preco: item.product.preco
+        })),
+        subtotal: subtotal,
+        deliveryFee: deliveryFee,
+        total: total,
+        customerName: name,
+        address: address,
+        paymentMethod: paymentMethod
+    };
+    
+    saveOrderToHistory(orderData);
+    
     // Abrir WhatsApp
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+    
+    // Limpar carrinho após enviar
+    state.cart = {};
+    updateCartUI();
+    renderMenu();
+    closeCart();
 }
