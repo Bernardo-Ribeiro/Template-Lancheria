@@ -15,7 +15,10 @@ const state = {
 };
 
 // Número do WhatsApp (substitua pelo seu)
-const WHATSAPP_NUMBER = 'xxxxxxxxxxx'; // Exemplo: '5511999999999'
+const WHATSAPP_NUMBER = '5511999999999';
+
+// Taxa de entrega fixa
+const DELIVERY_FEE = 10.00;
 
 // ============================================
 // INICIALIZAÇÃO
@@ -183,6 +186,8 @@ function updateProductCard(productId) {
 function updateCartUI() {
     const cartCount = document.getElementById('cart-count');
     const cartItems = document.getElementById('cart-items');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+    const deliveryFeeDisplay = document.getElementById('delivery-fee');
     const cartTotal = document.getElementById('cart-total');
     const cartTotalSection = document.getElementById('cart-total-section');
     const orderForm = document.getElementById('order-form');
@@ -201,11 +206,11 @@ function updateCartUI() {
     
     // Renderizar itens do carrinho
     let itemsHtml = '';
-    let total = 0;
+    let subtotal = 0;
     
     Object.values(state.cart).forEach(item => {
-        const subtotal = item.product.preco * item.quantity;
-        total += subtotal;
+        const itemSubtotal = item.product.preco * item.quantity;
+        subtotal += itemSubtotal;
         
         itemsHtml += `
             <div class="cart-item">
@@ -213,12 +218,18 @@ function updateCartUI() {
                     <h4>${item.product.nome}</h4>
                     <p class="cart-item-quantity">${item.quantity}x</p>
                 </div>
-                <span class="cart-item-price">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+                <span class="cart-item-price">R$ ${itemSubtotal.toFixed(2).replace('.', ',')}</span>
             </div>
         `;
     });
     
+    // Usar taxa de entrega fixa
+    const deliveryFee = DELIVERY_FEE;
+    const total = subtotal + deliveryFee;
+    
     cartItems.innerHTML = itemsHtml;
+    cartSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    deliveryFeeDisplay.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
     cartTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
     cartTotalSection.style.display = 'block';
     orderForm.style.display = 'block';
@@ -252,6 +263,17 @@ function setupEventListeners() {
     
     // Formulário de pedido
     document.getElementById('order-form').addEventListener('submit', handleOrderSubmit);
+    
+    // Mostrar campo de troco quando selecionar "Dinheiro"
+    document.getElementById('payment-method').addEventListener('change', function() {
+        const changeGroup = document.getElementById('change-group');
+        if (this.value === 'Dinheiro') {
+            changeGroup.style.display = 'block';
+        } else {
+            changeGroup.style.display = 'none';
+            document.getElementById('change-for').value = '';
+        }
+    });
 }
 
 // ============================================
@@ -262,26 +284,47 @@ function handleOrderSubmit(e) {
     
     const name = document.getElementById('customer-name').value.trim();
     const address = document.getElementById('customer-address').value.trim();
+    const paymentMethod = document.getElementById('payment-method').value;
     const notes = document.getElementById('customer-notes').value.trim();
+    const changeFor = document.getElementById('change-for').value;
     
     if (!name || !address) {
         alert('Por favor, preencha seu nome e endereço.');
         return;
     }
     
+    if (!paymentMethod) {
+        alert('Por favor, selecione a forma de pagamento.');
+        return;
+    }
+    
     // Gerar mensagem do WhatsApp
     let message = '*Pedido:*\n\n';
-    let total = 0;
+    let subtotal = 0;
     
     Object.values(state.cart).forEach(item => {
-        const subtotal = item.product.preco * item.quantity;
-        total += subtotal;
-        message += `• ${item.product.nome} (${item.quantity}x) - R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+        const itemSubtotal = item.product.preco * item.quantity;
+        subtotal += itemSubtotal;
+        message += `• ${item.product.nome} (${item.quantity}x) - R$ ${itemSubtotal.toFixed(2).replace('.', ',')}\n`;
     });
     
-    message += `\n*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
+    const deliveryFee = DELIVERY_FEE;
+    const total = subtotal + deliveryFee;
+    
+    message += `\n*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+    message += `*Taxa de Entrega:* R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
+    message += `*Total Final: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
     message += `*Nome:* ${name}\n`;
     message += `*Endereço:* ${address}\n`;
+    message += `*Forma de Pagamento:* ${paymentMethod}\n`;
+    
+    if (paymentMethod === 'Dinheiro' && changeFor) {
+        const change = parseFloat(changeFor) - total;
+        message += `*Troco para:* R$ ${parseFloat(changeFor).toFixed(2).replace('.', ',')}\n`;
+        if (change > 0) {
+            message += `*Troco:* R$ ${change.toFixed(2).replace('.', ',')}\n`;
+        }
+    }
     
     if (notes) {
         message += `*Observações:* ${notes}\n`;
