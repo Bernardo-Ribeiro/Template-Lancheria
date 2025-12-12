@@ -26,11 +26,11 @@ const BUSINESS_HOURS = {
     // Dias da semana (0 = Domingo, 1 = Segunda, ..., 6 = Sábado)
     0: null, // Domingo - Fechado
     1: null, // Segunda - Fechado
-    2: { open: '18:00', close: '23:00' }, // Terça
-    3: { open: '18:00', close: '23:00' }, // Quarta
-    4: { open: '18:00', close: '23:00' }, // Quinta
-    5: { open: '18:00', close: '23:00' }, // Sexta
-    6: { open: '18:00', close: '23:00' }  // Sábado
+    2: { open: '11:00', close: '23:00' }, // Terça
+    3: { open: '11:00', close: '23:00' }, // Quarta
+    4: { open: '11:00', close: '23:00' }, // Quinta
+    5: { open: '11:00', close: '23:00' }, // Sexta
+    6: { open: '11:00', close: '23:00' }  // Sábado
 };
 
 // ============================================
